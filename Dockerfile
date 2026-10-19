@@ -24,6 +24,14 @@ RUN dotnet publish src/NzbDrone.Console/Radarr.Console.csproj \
     -p:EnableAnalyzers=false \
     --output /app
 
+RUN dotnet publish src/NzbDrone.Mono/Radarr.Mono.csproj \
+    --configuration Release \
+    --framework net10.0 \
+    --runtime linux-x64 \
+    --self-contained false \
+    -p:EnableAnalyzers=false \
+    --output /app
+
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0
 
