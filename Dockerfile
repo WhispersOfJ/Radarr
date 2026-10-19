@@ -44,10 +44,13 @@ RUN apt-get update \
 
 WORKDIR /app
 
-COPY --from=backend /app ./
-COPY --from=frontend /src/_output/UI ./UI
+COPY --from=backend /app ./bin
+COPY --from=frontend /src/_output/UI ./bin/UI
+
+RUN printf 'PackageVersion=7.0.0.10772\nPackageAuthor=Legends fork\nUpdateMethod=Docker\nBranch=nightly\n' \
+    > /app/package_info
 
 VOLUME ["/config"]
 EXPOSE 7878
 
-ENTRYPOINT ["/app/Radarr", "-data=/config", "-nobrowser"]
+ENTRYPOINT ["/app/bin/Radarr", "-data=/config", "-nobrowser"]
