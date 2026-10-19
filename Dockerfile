@@ -42,6 +42,14 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates curl tzdata \
     && rm -rf /var/lib/apt/lists/*
 
+ARG VERSION=7.0.0.10772
+ARG REVISION=unknown
+
+LABEL org.opencontainers.image.title="Radarr select-count fork" \
+      org.opencontainers.image.version="${VERSION}" \
+      org.opencontainers.image.revision="${REVISION}" \
+      org.opencontainers.image.source="https://github.com/Radarr/Radarr"
+
 WORKDIR /app
 
 COPY --from=backend /app ./bin
