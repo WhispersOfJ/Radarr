@@ -15,6 +15,9 @@ WORKDIR /src
 
 COPY . .
 
+RUN sed -i 's|<AssemblyVersion>10.0.0.\*</AssemblyVersion>|<AssemblyVersion>7.0.0.10772</AssemblyVersion>|' \
+    src/Directory.Build.props
+
 RUN dotnet publish src/NzbDrone.Console/Radarr.Console.csproj \
     --configuration Release \
     --framework net10.0 \
