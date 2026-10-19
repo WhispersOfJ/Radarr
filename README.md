@@ -33,11 +33,16 @@ The repository builds Radarr from source and serves the production frontend
 bundle:
 
 ```bash
-docker build -t legends/radarr-select-count:7.0.0.10772 .
+docker build \
+  --build-arg VERSION=7.0.0.10772 \
+  --build-arg REVISION=$(git rev-parse --short HEAD) \
+  -t legends/radarr-select-count:7.0.0.10772 .
 ```
 
-The image is a framework-dependent .NET 10 build. It runs as the user supplied by
-the container runtime; mount a writable `/config` and expose port `7878`.
+The image is a framework-dependent .NET 10 build, and `VERSION`/`REVISION` are
+written to its `org.opencontainers.image.*` labels so a running container can be
+traced back to a commit. It runs as the user supplied by the container runtime;
+mount a writable `/config` and expose port `7878`.
 
 ```bash
 docker run -d \
