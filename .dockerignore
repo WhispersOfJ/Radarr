@@ -1,0 +1,7 @@
+.git
+.gitignore
+node_modules
+_output
+_tests
+_artifacts
+**/*.js.map
